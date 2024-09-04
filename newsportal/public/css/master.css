@@ -1,0 +1,91 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  outline: none;
+  border: none;
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Sen', sans-serif;
+  gap: .25em;
+}
+
+header, main, footer{
+  width: 100%;
+  max-width: 992px;
+  padding: 0 .5em;
+}
+
+.jumbotron{
+  width: 100%;
+  background: rgba(1, 1, 3, .075);
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+  padding: 1.25em .75em 1.15em;
+  border-radius: 2.5px;
+}
+
+.thumbnail{
+  display: flex;
+  flex-direction: column;
+  padding: 1.15em;
+  gap: .05em;
+  color: #fff;
+  line-height: 1.65em;
+}
+
+.thumbnail > span:nth-child(1){
+  font-size: 1.35em;
+  font-weight: 600;
+}
+
+.thumbnail > span:not(:nth-child(1)){
+  font-size: .95em;
+  font-weight: 300;
+}
+
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: .2em;
+  padding: 0 .25em;
+}
+
+section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5em;
+}
+
+hr{
+  background: rgba(1, 1, 3, .175);
+  height: 1.25px;
+  width: 90%;
+}
+
+main section{
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.ads{
+  position: sticky;
+  top: .25em;
+  width: 120vw;
+}
+
+.ads .jumbotron{background: transparent;}
+
+@media (max-width: 768px) {
+  main section{flex-direction: column;}
+
+  .ads{width: 100%;}
+
+}
