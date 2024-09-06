@@ -14,12 +14,19 @@ class Artikel extends Controller {
   }
 
   public function validate($params) {
-    echo __CLASS__. '/'. __FUNCTION__. '<br>';
-    foreach ($_POST as $key => $value) {
+    if($params[0]== 'post') {echo 'Post cuy<br>';}
+    else {
+      if($params[1]== 'update') {echo 'Update coy<br>';}
+      elseif($params[1]== 'delete') {echo 'Delete nih bro<br>';}
+      echo $params[0]. '<br>';
+    } echo '<br>';
+    $data['artikel']= $_POST;
+    $data['file']= $_FILES['bannerArtikel'];
+    foreach ($data['artikel'] as $key => $value) {
       echo '<b>'. $key. '</b> => '. $value. '<br>';
 
     } echo '<br>';
-    foreach ($_FILES['bannerArtikel'] as $key => $value) {
+    foreach ($data['file'] as $key => $value) {
       echo '<b>'. $key. '</b> => '. $value. '<br>';
 
     }

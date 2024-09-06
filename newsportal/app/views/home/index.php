@@ -13,6 +13,7 @@
           <div class="wrapper">
             <?php
             foreach ($data as $key => $value) {
+              if($value['statusArtikel']== 'terbit') continue;
               $date= date_diff(date_create($value['dateArtikel']), date_create(date('Y-m-d H:i:s')));
               if($date->y> 0) {
                 $date= $date->y. ' tahun lalu';

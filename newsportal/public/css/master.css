@@ -78,7 +78,7 @@ main section{
 .ads{
   position: sticky;
   top: .25em;
-  width: 120vw;
+  max-width: 320px;
 }
 
 .ads .jumbotron{background: transparent;}
@@ -86,6 +86,6 @@ main section{
 @media (max-width: 768px) {
   main section{flex-direction: column;}
 
-  .ads{width: 100%;}
+  .ads{max-width: none;}
 
 }

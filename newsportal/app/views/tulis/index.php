@@ -20,17 +20,13 @@
 
     <div>
       <span contenteditable id="kategoriArtikel" placeholder="Kategori"></span>
-      <span>.</span>
-      <span contenteditable id="penulis" placeholder="Penulis"></span>
-      <span>.</span>
-      <span contenteditable id="kontakPenulis" placeholder="Kontak penulis"></span>
       <?php if ($data['dateTerbitArtikel']!= 'Tanggal terbit'): ?>
         <span>.</span>
         <span id="dateTerbitArtikel">
           <?php if($data['dateTerbitArtikel']== '') {
             echo 'Belum terbit';
           } else {
-            echo $data['dateTerbitArtikel'];
+            echo date('j F, Y h:i', strtotime($data['dateTerbitArtikel']));
           }?>
         </span>
       <?php endif; ?>
@@ -51,6 +47,13 @@
 
     </div>
     <hr>
+    <div style="display: flex; gap: .25em; align-items: center;">
+      <span>Oleh: </span>
+      <span contenteditable id="penulis" placeholder="Penulis"></span>
+      <span>.</span>
+      <span contenteditable id="kontakPenulis" placeholder="Kontak(wa/email dll.)"></span>
+    </div>
+
     <div class="isiArtikel">
       <p contenteditable id="isiArtikel" placeholder="Isi artikel"></p>
 
@@ -62,15 +65,21 @@
     </div>
     <div class="button-wrapper">
       <?php if($data['artikelId']== '') { ?>
-        <button type="submit" id="post">Kirim</button>
+        <button type="button" id="post">Kirim</button>
       <?php } else { ?>
-        <button type="submit" id="update">Simpan</button>
-        <button type="submit" id="delete">Hapus</button>
+        <button type="button" id="update">Simpan</button>
+        <button type="button" id="delete">Hapus</button>
         <?php if($data['statusArtikel']!= 'terbit') { ?>
-        <button type="submit" id="update" name="statusArtikel" value="terbit">Simpan & terbitkan</button>
+        <button type="button" id="update" name="statusArtikel" value="terbit">Simpan & terbitkan</button>
         <?php }} ?>
 
     </div>
+    <dialog>
+      <span>artikel?</span>
+      <button type="submit">Lanjutkan</button>
+      <button type="button" id="cls-modal">Batal</button>
+
+    </dialog>
 
   </form>
 

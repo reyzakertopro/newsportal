@@ -3,11 +3,28 @@ const inputs= document.querySelectorAll('input');
 const banner= document.querySelector('#bannerArtikel');
 const clearBanner= document.querySelector('#clearBanner');
 const submits= document.querySelectorAll('[type=submit]');
+const modalButtons= document.querySelectorAll('.button-wrapper button');
+
+modalButtons.forEach(modalButton=> {
+  modalButton.onclick= ()=> {
+    document.querySelector('dialog').showModal();
+    document.querySelector('dialog span').innerHTML= modalButton.innerHTML+ ' artikel?';
+    document.querySelector('dialog [type=submit]').setAttribute('id', modalButton.id);
+
+  };
+
+});
+
+document.querySelector('#cls-modal').onclick= ()=> {
+  document.querySelector('dialog').close();
+
+};
 
 inputs.forEach(input=> input.classList.add('hidden'));
 
 submits.forEach(submit=> {
   submit.onclick= ()=> {
+    document.querySelector('dialog').close();
     document.querySelector('form').onsubmit= ()=> {
       document.querySelector('form').action= document.querySelector('form').action+ submit.id;
 
@@ -49,16 +66,16 @@ clearBanner.onclick= ()=> {
 };
 
 if(document.querySelector('.banner').style.backgroundImage!=
-  'linear-gradient(rgba(1, 1, 3, 0.05), rgba(1, 1, 3, 0.5)), url("http://localhost/newsportal/public/uploads/")') {
-    document.querySelector('.banner').removeAttribute('for');
-    clearBanner.classList.remove('hidden');
-    document.querySelector('.caption').classList.remove('hidden');
-    document.querySelectorAll('.banner span').forEach(el=> {
-      el.classList.add('hidden');
+'linear-gradient(rgba(1, 1, 3, 0.05), rgba(1, 1, 3, 0.5)), url("http://'+ window.location.hostname+ '/newsportal/public/uploads/")') {
+  document.querySelector('.banner').removeAttribute('for');
+  clearBanner.classList.remove('hidden');
+  document.querySelector('.caption').classList.remove('hidden');
+  document.querySelectorAll('.banner span').forEach(el=> {
+    el.classList.add('hidden');
 
-    });
+  });
 
-  }
+}
 
 banner.onchange= ()=> {
   let link= URL.createObjectURL(banner.files[0]);

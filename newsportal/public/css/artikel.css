@@ -14,6 +14,8 @@
   font-size: .95em;
   color: teal;
 }
+#penulis, #kontakPenulis, #dateTerbitArtikel{color: rgba(1, 1, 3, .65);}
+#penulis{font-size: .95em;}
 .banner{
   width: 100%;
   height: 55vh;
@@ -42,11 +44,9 @@
   font-family: inherit;
   cursor: pointer;
 }
-[contenteditable]:empty::before{
-  background: rgba(1, 1, 3, .05);
-  opacity: .75;
-}
+[contenteditable]:empty::before{opacity: .75;}
 [contenteditable]{
+  background: rgba(1, 1, 3, .075);
   width: fit-content;
   max-width: 100%;
   position: relative;
@@ -125,3 +125,43 @@
   color: #EE2E31;
 }
 .required:empty::before{text-shadow: 0 0 5px rgba(1, 1, 3, .25);}
+dialog:modal{
+  background: teal;
+  color: #fff;
+  padding: .5em;
+  border-radius: 1.5px;
+  display: flex;
+  align-items: center;
+  gap: .5em;
+  font-size: 1em;
+}
+dialog::backdrop{
+  background: rgba(1, 1, 3, .15);
+  backdrop-filter: blur(1.5px);
+}
+dialog:modal button{
+  font-family: inherit;
+  font-size: .975em;
+  font-weight: 500;
+  padding: .15em;
+  background: transparent;
+  color: #fff;
+  border-radius: 2.5px;
+  outline: 1.75px solid #fff;
+  cursor: pointer;
+  transition: all .05s;
+}
+dialog:modal button:hover{
+  color: #010101;
+  background: #fff;
+  outline: none;
+}
+dialog #cls-modal{
+  background: #fff;
+  color: #EE2E31;
+  outline: none;
+}
+dialog #cls-modal:hover{
+  background: #EE2E31;
+  color: #fff;
+}

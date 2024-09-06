@@ -4,13 +4,11 @@
     <div>
       <span id="kategoriArtikel"><?= $data['kategoriArtikel']; ?></span>
       <span>.</span>
-      <span><?= $data['penulis']; ?></span>
-      <span>.</span>
       <span id="dateTerbitArtikel">
         <?php if($data['dateTerbitArtikel']== '') {
           echo 'Belum terbit';
         } else {
-          echo date('Y-m-d', strtotime($data['dateTerbitArtikel']));
+          echo date('j F, Y h:i', strtotime($data['dateTerbitArtikel']));
         }?>
       </span>
     </div>
@@ -26,6 +24,11 @@
 
     </div>
     <hr>
+    <div style="display: flex; gap: .25em; align-items: center;">
+      <span>Oleh: </span>
+      <span id="penulis"><?= $data['penulis']; ?></span>
+    </div>
+
     <div class="isiArtikel">
       <p><?= $data['isiArtikel']; ?></p>
 
