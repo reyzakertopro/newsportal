@@ -25,7 +25,7 @@ class Artikel_model {
         str_replace(
           $data['judulArtikel']. ' '.
           $data['penulis']. ' '.
-          date('Y-m-d h i s', strtotime($data['dateArtikel'])). ' '
+          date('Y-m-d H i s', strtotime($data['dateArtikel'])). ' '
           , '', $data['bannerArtikel']);
       $data['captionBanner']= pathinfo($data['captionBanner'], PATHINFO_FILENAME);
 
@@ -50,34 +50,79 @@ class Artikel_model {
   }
 
   public function postArtikel( $data= [] ) {
-    if( !isset($data['statusArtikel']) ) { $data['statusArtikel']= 'pending'; }
-    if( !isset($data['featured']) ) { $data['featured']= false; }
+    !isset($data['artikel']['statusArtikel'])?
+      $data['artikel']['statusArtikel']= 'pending':
+      false;
+    !isset($data['artikel']['featured'])?
+      $data['artikel']['featured']= 'false':
+      false;
+    $data['artikel']['dateArtikel']= date('Y-m-d H:i:s');
+    $data['artikel']['bannerArtikel']=
+      $data['artikel']['judulArtikel']. ' '.
+      $data['artikel']['penulis']. ' '.
+      date('Y-m-d H i s', strtotime($data['artikel']['dateArtikel'])). ' '.
+      $data['artikel']['captionBanner']. '.'.
+      pathinfo($data['file']['name'], PATHINFO_EXTENSION);
 
-    $this->db->query('INSERT INTO '. $this->table. " VALUES ('0', :judulArtikel, :penulis, :isiArtikel, :statusArtikel, :bannerArtikel, :dateArtikel, :kategoriArtikel, :tagsArtikel, :kontakPenulis, '', :featured)");
+    $this->db->query('INSERT INTO '. $this->table. "(
+      artikelId, kategoriArtikel, judulArtikel, isiArtikel, penulis,
+      tagsArtikel, kontakPenulis, statusArtikel, featured, dateArtikel, bannerArtikel)
+      VALUES (
+      '0', :kategoriArtikel, :judulArtikel, :isiArtikel, :penulis,
+      :tagsArtikel, :kontakPenulis, :statusArtikel, :featured, :dateArtikel, :bannerArtikel)");
 
-    $this->db->bind('judulArtikel', $data['judulArtikel']);
-    $this->db->bind('penulis', $data['penulis']);
-    $this->db->bind('isiArtikel', $data['isiArtikel']);
-    $this->db->bind('statusArtikel', $data['statusArtikel']);
-    $this->db->bind('bannerArtikel', $data['bannerArtikel']);
-    $this->db->bind('dateArtikel', $data['dateArtikel']);
-    $this->db->bind('kategoriArtikel', $data['kategoriArtikel']);
-    $this->db->bind('tagsArtikel', $data['tagsArtikel']);
-    $this->db->bind('kontakPenulis', $data['kontakPenulis']);
-    $this->db->bind('featured', $data['featured']);
+    foreach($data['artikel'] as $a=> $b) {
+      if($a== 'captionBanner') continue;
+      $this->db->bind($a, $b);
+    }
 
     $this->db->execute();
-    return true;
+    Upload::uploadGambar($data['artikel']['bannerArtikel'], $data['file']);
 
   }
 
   public function updateArtikel( $data= [] ) {
-    var_dump($data);
+    $this->db->query('SELECT bannerArtikel, dateArtikel FROM '. $this->table. ' WHERE artikelId=:id_artikel');
+    $this->db->bind('id_artikel', $data['id']);
+    $data['buffer']= $this->db->single();
+
+    !empty($data['file']['name'])?
+      $data['buffer']['extension']= pathinfo($data['file']['name'], PATHINFO_EXTENSION):
+      $data['buffer']['extension']= pathinfo($data['buffer']['bannerArtikel'], PATHINFO_EXTENSION);
+
+    isset($data['artikel']['statusArtikel'])?
+      $data['artikel']['dateTerbitArtikel']= date('Y-m-d H:i:s'):
+      false;
+
+    $data['artikel']['bannerArtikel']=
+      $data['artikel']['judulArtikel']. ' '.
+      $data['artikel']['penulis']. ' '.
+      date('Y-m-d h i s', strtotime($data['buffer']['dateArtikel'])). ' '.
+      $data['artikel']['captionBanner']. '.'.
+      $data['buffer']['extension'];
+
+    foreach($data['artikel'] as $key => $value) {
+      if($key== 'captionBanner') continue;
+      $this->db->query('UPDATE '. $this->table. ' SET '. $key. '= :data WHERE artikelId=:id_artikel');
+      $this->db->bind('data', $value);
+      $this->db->bind('id_artikel', $data['id']);
+      $this->db->execute();
+    }
+
+    rename('public/uploads/'. $data['buffer']['bannerArtikel'], 'public/uploads/'. $data['artikel']['bannerArtikel']);
+    Upload::uploadGambar($data['artikel']['bannerArtikel'], $data['file']);
+
 
   }
 
   public function deleteArtikel( $data= [] ) {
-    var_dump($data);
+    $this->db->query('SELECT bannerArtikel FROM '. $this->table. ' WHERE artikelId=:id_artikel');
+    $this->db->bind('id_artikel', $data['id']);
+    $targetFile= array_values($this->db->single())[0];
+    $this->db->query('DELETE FROM '. $this->table. ' WHERE artikelId=:id_artikel');
+    $this->db->bind('id_artikel', $data['id']);
+    $this->db->execute();
+    unlink('public/uploads/'. $targetFile);
 
   }
 

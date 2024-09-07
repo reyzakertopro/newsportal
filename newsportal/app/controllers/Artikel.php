@@ -14,22 +14,19 @@ class Artikel extends Controller {
   }
 
   public function validate($params) {
-    if($params[0]== 'post') {echo 'Post cuy<br>';}
-    else {
-      if($params[1]== 'update') {echo 'Update coy<br>';}
-      elseif($params[1]== 'delete') {echo 'Delete nih bro<br>';}
-      echo $params[0]. '<br>';
-    } echo '<br>';
     $data['artikel']= $_POST;
     $data['file']= $_FILES['bannerArtikel'];
-    foreach ($data['artikel'] as $key => $value) {
-      echo '<b>'. $key. '</b> => '. $value. '<br>';
 
-    } echo '<br>';
-    foreach ($data['file'] as $key => $value) {
-      echo '<b>'. $key. '</b> => '. $value. '<br>';
-
+    if($params[0]== 'post') {
+      $data['id']= '';
+      $action= $params[0]. 'Artikel';
+    } else {
+      $data['id']= $params[0];
+      $action= $params[1]. 'Artikel';
     }
+
+    $this->model('Artikel_model')->$action($data);
+    header('Location: '. BASEURL);
 
   }
 

@@ -26,7 +26,7 @@
           <?php if($data['dateTerbitArtikel']== '') {
             echo 'Belum terbit';
           } else {
-            echo date('j F, Y h:i', strtotime($data['dateTerbitArtikel']));
+            echo date('j F, Y H:i', strtotime($data['dateTerbitArtikel']));
           }?>
         </span>
       <?php endif; ?>

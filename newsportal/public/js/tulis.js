@@ -10,6 +10,8 @@ modalButtons.forEach(modalButton=> {
     document.querySelector('dialog').showModal();
     document.querySelector('dialog span').innerHTML= modalButton.innerHTML+ ' artikel?';
     document.querySelector('dialog [type=submit]').setAttribute('id', modalButton.id);
+    document.querySelector('dialog [type=submit]').setAttribute('name', modalButton.name);
+    document.querySelector('dialog [type=submit]').setAttribute('value', modalButton.value);
 
   };
 

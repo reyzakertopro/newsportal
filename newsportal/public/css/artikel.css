@@ -15,7 +15,7 @@
   color: teal;
 }
 #penulis, #kontakPenulis, #dateTerbitArtikel{color: rgba(1, 1, 3, .65);}
-#penulis{font-size: .95em;}
+#penulis, #kontakPenulis{font-size: .95em;}
 .banner{
   width: 100%;
   height: 55vh;
