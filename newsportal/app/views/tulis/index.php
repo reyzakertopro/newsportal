@@ -3,7 +3,7 @@
   <form action="<?= BASEURL; ?>/artikel/validate/<?php if($data['artikelId']!= '') echo $data['artikelId']. '/'; ?>" method="post" class="jumbotron" style="position: relative;" enctype="multipart/form-data">
     <input type="text" name="kategoriArtikel" placeholder="Kategori artikel" value="<?= $data['kategoriArtikel']; ?>">
     <input type="text" name="judulArtikel" placeholder="Judul artikel" value="<?= $data['judulArtikel']; ?>">
-    <input type="file" id="bannerArtikel" name="bannerArtikel">
+    <input type="file" id="bannerArtikel" name="bannerArtikel" accept="image/jpg, image/jpeg, image/png, image/tiff">
     <input type="text" name="captionBanner" placeholder="Caption" value="<?= $data['captionBanner']; ?>">
     <input type="text" name="isiArtikel" placeholder="Isi artikel" value="<?= $data['isiArtikel']; ?>">
     <input type="text" name="penulis" placeholder="Penulis" value="<?= $data['penulis']; ?>">
@@ -48,7 +48,7 @@
     </div>
     <hr>
     <div style="display: flex; gap: .25em; align-items: center;">
-      <span>Oleh: </span>
+      <span style="font-size: .95em;">Oleh: </span>
       <span contenteditable id="penulis" placeholder="Penulis"></span>
       <span>.</span>
       <span contenteditable id="kontakPenulis" placeholder="Kontak(wa/email dll.)"></span>

@@ -25,8 +25,7 @@
     </div>
     <hr>
     <div style="display: flex; gap: .25em; align-items: center;">
-      <span>Oleh: </span>
-      <span id="penulis"><?= $data['penulis']; ?></span>
+      <span id="penulis">Oleh: <?= $data['penulis']; ?></span>
     </div>
 
     <div class="isiArtikel">

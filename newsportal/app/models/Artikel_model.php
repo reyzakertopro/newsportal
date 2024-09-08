@@ -25,7 +25,7 @@ class Artikel_model {
         str_replace(
           $data['judulArtikel']. ' '.
           $data['penulis']. ' '.
-          date('Y-m-d H i s', strtotime($data['dateArtikel'])). ' '
+          date('Y-m-d h i s', strtotime($data['dateArtikel'])). ' '
           , '', $data['bannerArtikel']);
       $data['captionBanner']= pathinfo($data['captionBanner'], PATHINFO_FILENAME);
 
