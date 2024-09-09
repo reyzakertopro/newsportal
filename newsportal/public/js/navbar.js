@@ -1,16 +1,23 @@
-const burger= document.querySelector('#burger-menu');
-const navMenu= document.querySelector('.nav-menu');
+const burger= document.querySelector('#burg');
+const sideBar= document.querySelector('.side-bar');
+const closeNav= document.querySelector('#close-nav');
 
 burger.onclick= ()=> {
-  navMenu.classList.toggle('active');
+  sideBar.classList.toggle('active');
   document.querySelector('body').classList.toggle('active');
+
+};
+
+closeNav.onclick= ()=> {
+  sideBar.classList.remove('active');
+  document.querySelector('body').classList.remove('active');
 
 };
 
 document.addEventListener('click', function(e){
   if(!document.querySelector('nav').contains(e.target)
      ||document.querySelector('#close').contains(e.target)){
-    navMenu.classList.remove('active');
+    sideBar.classList.remove('active');
     document.querySelector('body').classList.remove('active');
 
   }

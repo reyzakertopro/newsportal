@@ -18,7 +18,12 @@ nav{
   align-items: center;
 }
 
-nav button{cursor: pointer;}
+nav button{
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  background: transparent;
+}
 
 nav > div{
   padding: .25em .5em;
@@ -31,46 +36,64 @@ nav > div{
 
 nav section{flex-direction: row;}
 
-#burger-menu{display: none;}
-.nav-menu .logo{display: none;}
-.nav-menu #close{display: none;}
+.side-bar{
+  position: fixed;
+  top: 0;
+  right: -100em;
+  bottom: 0;
+  background: rgba(255, 255, 255, .95);
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 280px;
+  display: flex;
+  gap: .75em;
+  padding: .95em;
+  z-index: 1;
+}
+.side-bar .title{
+  font-size: 1.15em;
+  font-weight: 500;
+  cursor: default;
+}
+.side-bar #close-nav{
+  position: absolute;
+  top: 1.15em;
+  right: 1.15em;
+}
+.side-bar div{
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  gap: .5em;
+  padding: 0 .5em;
+}
+.side-bar div a{
+  width: 100%;
+  padding: .25em;
+  border-radius: 2.5px;
+}
+.side-bar div a:hover{background: rgba(1, 1, 3, .05);}
+.side-bar .nav-menu{display: none;}
+.side-bar .profile-menu{display: flex;}
+.side-bar hr{
+  display: none;
+  width: 100%;
+}
+.side-bar.active{right: 0;}
+
+body.active::after{
+  content: '';
+  background: rgba(1, 1, 3, .5);
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+}
 
 @media (max-width: 768px) {
-  .nav-menu{
-    background: rgba(255, 255, 255, .95);
-    position: fixed;
-    top: 0;
-    right: -100em;
-    height: 100vh;
-    display: flex;
-    width: 100%;
-    max-width: 240px;
-    flex-direction: column;
-    gap: 2.25em;
-    padding: 1.5em;
-    z-index: 1;
-    transition: all .15s;
-  }
+  .nav-menu{display: none;}
 
-  .active{right: 0;}
-
-  #burger-menu{display: inline-block;}
-  .nav-menu .logo{display: inline-block;}
-  .nav-menu #close{
-    display: inline-block;
-    position: absolute;
-    background: transparent;
-    right: .75em;
-    top: .75em;
-    font-size: 1.25em;
-  }
-
-  body.active::after{
-    content: '';
-    background: rgba(1, 1, 3, .5);
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-  }
+  .side-bar .nav-menu{display: flex;}
+  .side-bar hr{display: inline-block;}
 
 }

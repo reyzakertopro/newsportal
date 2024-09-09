@@ -54,9 +54,10 @@
         <h2>Daftar artikel</h2>
         <div class="wrapper">
           <?php
+          usort($data, fn($a, $b)=> $a['dateTerbitArtikel']<=> $b['dateTerbitArtikel']);
           foreach ($data as $key => $value) {
             if(empty($value['dateTerbitArtikel'])) continue;
-            $date= date_diff(date_create($value['dateArtikel']), date_create(date('Y-m-d H:i:s')));
+            $date= date_diff(date_create($value['dateTerbitArtikel']), date_create(date('Y-m-d H:i:s')));
             if($date->y> 0) {
               $date= $date->y. ' tahun lalu';
             } elseif($date->m> 0) {
