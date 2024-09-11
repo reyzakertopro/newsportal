@@ -16,7 +16,7 @@
         <a href="<?= BASEURL; ?>/pencarian">Pencarian</a>
         <button id="burg">
           <?php if(isset($_SESSION['pengguna'])) { ?>
-            <span><?= $_SESSION['pengguna']['nama_pengguna']; ?></span>
+            <span><?= explode(' ', $_SESSION['pengguna']['nama_pengguna'])[0]; ?></span>
           <?php } else { ?>
             <i class="fa-solid fa-bars"></i>
           <?php } ?>
@@ -25,9 +25,9 @@
 
       <section class="side-bar">
         <?php if(!isset($_SESSION['pengguna'])){ ?>
-          <span class="title">Logo</span>
+        <span class="title">Logo</span>
         <?php } else { ?>
-          <span class="title"><?= $_SESSION['pengguna']['nama_pengguna']; ?></span>
+        <span class="title"><?= $_SESSION['pengguna']['nama_pengguna']; ?></span>
         <?php } ?>
         <button id="close-nav"><i class="fa-solid fa-xmark"></i></button>
         <div class="nav-menu">

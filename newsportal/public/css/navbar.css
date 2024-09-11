@@ -84,7 +84,8 @@ nav section{flex-direction: row;}
 
 body.active::after{
   content: '';
-  background: rgba(1, 1, 3, .5);
+  background: rgba(1, 1, 3, .35);
+  backdrop-filter: blur(1.5px);
   position: fixed;
   width: 100%;
   height: 100vh;

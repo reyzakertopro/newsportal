@@ -16,7 +16,7 @@ closeNav.onclick= ()=> {
 
 document.addEventListener('click', function(e){
   if(!document.querySelector('nav').contains(e.target)
-     ||document.querySelector('#close').contains(e.target)){
+  ||closeNav.contains(e.target)){
     sideBar.classList.remove('active');
     document.querySelector('body').classList.remove('active');
 

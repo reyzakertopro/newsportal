@@ -90,6 +90,10 @@ class Artikel_model {
       $data['buffer']['extension']= pathinfo($data['file']['name'], PATHINFO_EXTENSION):
       $data['buffer']['extension']= pathinfo($data['buffer']['bannerArtikel'], PATHINFO_EXTENSION);
 
+    !isset($data['artikel']['featured'])?
+      $data['artikel']['featured']= 'false':
+      false;
+
     isset($data['artikel']['statusArtikel'])?
       $data['artikel']['dateTerbitArtikel']= date('Y-m-d H:i:s'):
       false;
@@ -111,7 +115,6 @@ class Artikel_model {
 
     rename('public/uploads/'. $data['buffer']['bannerArtikel'], 'public/uploads/'. $data['artikel']['bannerArtikel']);
     Upload::uploadGambar($data['artikel']['bannerArtikel'], $data['file']);
-
 
   }
 

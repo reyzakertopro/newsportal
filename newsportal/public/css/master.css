@@ -13,6 +13,7 @@ body{
   align-items: center;
   font-family: 'Sen', sans-serif;
   gap: .25em;
+  /* height: 500vh; */
 }
 
 header, main, footer{
@@ -31,35 +32,9 @@ header, main, footer{
   border-radius: 2.5px;
 }
 
-.thumbnail{
-  display: flex;
-  flex-direction: column;
-  padding: 1.15em;
-  gap: .05em;
-  color: #fff;
-  line-height: 1.65em;
-}
-
-.thumbnail > span:nth-child(1){
-  font-size: 1.35em;
-  font-weight: 600;
-}
-
-.thumbnail > span:not(:nth-child(1)){
-  font-size: .95em;
-  font-weight: 300;
-}
-
-.wrapper{
-  display: flex;
-  flex-direction: column;
-  gap: .2em;
-  padding: 0 .25em;
-}
-
 section{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   gap: .5em;
 }
@@ -70,22 +45,106 @@ hr{
   width: 90%;
 }
 
+.wrapper{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+}
+
 main section{
   flex-direction: row;
   align-items: flex-start;
 }
 
-.ads{
-  position: sticky;
-  top: .25em;
-  max-width: 320px;
+.card{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.5em;
+}
+.card span{
+  color: #fff;
+  width: fit-content;
+}
+.card .judul{
+  border-radius: 1.5px;
+  font-size: 1.5em;
+  font-weight: 500;
+  background: rgba(0, 128, 128, .85);
+  box-shadow: 3px 3px 5px #4B3217;
+  width: fit-content;
+  max-width: 420px;
+  padding: .5em;
+  margin-left: -.75em;
+}
+.card .desc{
+  background: #fff;
+  width: fit-content;
+  margin-top: -.25em;
+  padding: .15em .5em;
+}
+.card .desc span{color: #010101;}
+
+.jumbotron .feat-btn{
+  text-shadow: 0 0 2.5px rgba(1, 1, 3, .95);
+  background: rgba(1, 1, 3, .75);
+  transition: all .15s;
+  border-radius: 2.5px;
+  height: fit-content;
+  position: absolute;
+  font-size: 1.25em;
+  cursor: pointer;
+  color: #fff;
+  opacity: .025;
+  top: 50%;
+  z-index: .75;
+  width: 2em;
+  height: 2em;
+}
+.jumbotron:has(.feat-btn):hover .feat-btn{opacity: .25;}
+.feat-btn#next:hover,
+.feat-btn#prev:hover{opacity: .95;}
+.feat-btn#next{right: .35em;}
+.feat-btn#prev{left: .35em;}
+.jumbotron.featured{
+  flex-direction: row;
+  position: relative;
+  overflow: hidden;
+  height: 50vh;
+  min-height: 240px;
+  padding: 0;
+  gap: 0;
+}
+.jumbotron.featured .card{
+  transition: all .25s;
+  position: absolute;
+  top: -101.5%;
+}
+.featured .card.appear{top: 0;}
+
+.jumbotron.list .bar{
+  width: 100%;
+  height: 100%;
+  padding: 1.25em;
+  display: flex;
+  flex-direction: column;
+  gap: .25em;
+  border-radius: 1.5px;
+}
+.jumbotron.list .bar span{color: #fff;}
+.jumbotron.list .bar span{font-size: .95em;}
+.jumbotron.list .bar > span:nth-child(1){
+  font-size: 1.25em;
+  font-size: 500;
 }
 
-.ads .jumbotron{background: transparent;}
+.ads{max-width: 300px;}
 
 @media (max-width: 768px) {
-  main section{flex-direction: column;}
-
+  section:has(.ads){flex-direction: column;}
   .ads{max-width: none;}
 
 }
