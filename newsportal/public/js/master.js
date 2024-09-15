@@ -1,37 +1,41 @@
-const featCards= document.querySelectorAll('.featured .card');
+const editorsPicks= document.querySelectorAll('.edipick-card');
 
-// set thumbnail featured
-featCards[0].classList.add('appear');
+editorsPicks[0].classList.add('active');
+document.querySelector('button:has(.fa-chevron-left)').onclick= previous;
+document.querySelector('button:has(.fa-chevron-right)').onclick= next;
 
-// Tombol next carousel
-document.querySelector('.feat-btn#next').onclick= ()=> {
-  for(let featCard of featCards) {
-    if(featCard.classList.contains('appear')) {
-      featCard.classList.remove('appear');
-      if(featCard.nextElementSibling.classList.contains('card')) {
-        featCard.nextElementSibling.classList.add('appear');
+function next() {
+  for(let editorsPick of editorsPicks) {
+    if(editorsPick.classList.contains('active')) {
+      editorsPick.classList.remove('active');
+      if(editorsPick.nextElementSibling.classList.contains('edipick-card')) {
+        editorsPick.nextElementSibling.classList.add('active');
+
       } else {
-        document.querySelector('.featured').firstElementChild.classList.add('appear');
+        editorsPicks[0].classList.add('active');
+
       } break;
+
     }
+
   }
-};
 
-// Tombol previous carousel
-document.querySelector('.feat-btn#prev').onclick= ()=> {
-    for(let featCard of featCards) {
-      if(featCard.classList.contains('appear')) {
-        featCard.classList.remove('appear');
-        if(featCard.previousElementSibling) {
-          featCard.previousElementSibling.classList.add('appear');
+}
 
-        } else {
-          featCards[featCards.length- 1].classList.add('appear');
+function previous() {
+  for(let editorsPick of editorsPicks) {
+    if(editorsPick.classList.contains('active')) {
+      editorsPick.classList.remove('active');
+      if(editorsPick.previousElementSibling!= undefined) {
+        editorsPick.previousElementSibling.classList.add('active');
 
-        } break;
+      } else {
+        editorsPicks[editorsPicks.length- 1].classList.add('active');
 
-      }
+      } break;
 
     }
 
-};
+  }
+
+}
