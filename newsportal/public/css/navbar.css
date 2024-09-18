@@ -18,6 +18,12 @@ nav{
   align-items: center;
 }
 
+nav .tanggal{
+  font-weight: 500;
+  color: #010101;
+  cursor: default;
+}
+
 nav button{
   cursor: pointer;
   font-family: inherit;

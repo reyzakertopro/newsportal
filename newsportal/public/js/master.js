@@ -39,3 +39,29 @@ function previous() {
   }
 
 }
+
+let xB, xA;
+editorsPicks.forEach(editorsPick=> {
+  editorsPick.ontouchstart= (e)=> {xB= e.touches[0].pageX;};
+  editorsPick.ontouchend= (e)=> {
+    xA= e.changedTouches[0].pageX;
+    if(xA> xB) {previous();}
+    else if(xA< xB) {next();}
+
+  };
+
+});
+
+const duration= 10* 60* 1000;
+const interval= 10* 1000;
+let remainingTime= duration;
+function autoSlide(){
+  next();
+  remainingTime-= interval;
+  if(remainingTime> 0){
+    setTimeout(autoSlide, interval);
+
+  }
+}
+
+autoSlide();

@@ -1,24 +1,29 @@
 <?php
 foreach($data as $key => $value) {
-  $data[$key]['dateTerbitArtikel']=
+  if($value['statusArtikel']== 'pending') {
+    $data[$key]['dateUi']= 'belum terbit';
+    continue;
+  }
+
+  $data[$key]['dateUi']=
     date_diff(date_create($data[$key]['dateTerbitArtikel']), date_create(date('Y-m-d H:i:s')));
-  switch($data[$key]['dateTerbitArtikel']) {
-    case $data[$key]['dateTerbitArtikel']->y > 0:
-    $data[$key]['dateTerbitArtikel']= $data[$key]['dateTerbitArtikel']->y. ' tahun lalu';
+  switch($data[$key]['dateUi']) {
+    case $data[$key]['dateUi']->y > 0:
+    $data[$key]['dateUi']= $data[$key]['dateUi']->y. ' tahun lalu';
     break;
-    case $data[$key]['dateTerbitArtikel']->m > 0:
-    $data[$key]['dateTerbitArtikel']= $data[$key]['dateTerbitArtikel']->m. ' bulan lalu';
+    case $data[$key]['dateUi']->m > 0:
+    $data[$key]['dateUi']= $data[$key]['dateUi']->m. ' bulan lalu';
     break;
-    case $data[$key]['dateTerbitArtikel']->days > 0:
-    $data[$key]['dateTerbitArtikel']= $data[$key]['dateTerbitArtikel']->days. ' hari lalu';
+    case $data[$key]['dateUi']->days > 0:
+    $data[$key]['dateUi']= $data[$key]['dateUi']->days. ' hari lalu';
     break;
-    case $data[$key]['dateTerbitArtikel']->h > 0:
-    $data[$key]['dateTerbitArtikel']= $data[$key]['dateTerbitArtikel']->h. ' jam lalu';
+    case $data[$key]['dateUi']->h > 0:
+    $data[$key]['dateUi']= $data[$key]['dateUi']->h. ' jam lalu';
     break;
-    case $data[$key]['dateTerbitArtikel']->i > 0:
-    $data[$key]['dateTerbitArtikel']= $data[$key]['dateTerbitArtikel']->i. ' menit lalu';
+    case $data[$key]['dateUi']->i > 0:
+    $data[$key]['dateUi']= $data[$key]['dateUi']->i. ' menit lalu';
     break;
-    default: $data[$key]['dateTerbitArtikel']= 'baru saja';
+    default: $data[$key]['dateUi']= 'baru saja';
 
   }
 
@@ -31,7 +36,7 @@ foreach($data as $key => $value) {
       <div class="jumbotron edipick">
         <?php foreach($data as $art): if($art['statusArtikel']== 'terbit'&& $art['featured']== 'true'): ?>
           <a class="edipick-card" href="<?= BASEURL; ?>/artikel/<?= $art['artikelId']; ?>">
-            <span class="date-desc"><?= $art['dateTerbitArtikel']; ?></span>
+            <span class="date-desc"><?= $art['dateUi']; ?></span>
             <span class="judul"><?= $art['judulArtikel']; ?></span>
             <span class="caption">
               <?=
@@ -72,7 +77,7 @@ foreach($data as $key => $value) {
               <div>
                 <span><?= $art['kategoriArtikel']; ?></span>
                 <span> . </span>
-                <span><?= $art['dateTerbitArtikel']; ?></span>
+                <span><?= $art['dateUi']; ?></span>
               </div>
             </a>
           <?php endforeach; ?>
@@ -83,7 +88,8 @@ foreach($data as $key => $value) {
 
       <div class="jumbotron">
         <h2>Daftar artikel</h2>
-        <?php usort($data, fn($a, $b)=> $b['dateTerbitArtikel']<=> $a['dateTerbitArtikel']);
+        <?php
+        usort($data, fn($a, $b)=> $b['dateTerbitArtikel']<=> $a['dateTerbitArtikel']);
         foreach($data as $art):
         if($art['statusArtikel']== 'pending') continue; ?>
           <a class="artikel-card" href="<?= BASEURL; ?>/artikel/<?= $art['artikelId']; ?>"
@@ -96,7 +102,7 @@ foreach($data as $key => $value) {
             <div>
               <span><?= $art['kategoriArtikel']; ?></span>
               <span> . </span>
-              <span><?= $art['dateTerbitArtikel']; ?></span>
+              <span><?= $art['dateUi']; ?></span>
             </div>
           </a>
         <?php endforeach; ?>
